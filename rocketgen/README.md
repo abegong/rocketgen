@@ -4,9 +4,8 @@
 
 ## To do
 
+* Attachments & Nesting
 * Fins
 * Windows
-* Attachments
-* Nesting
 
 

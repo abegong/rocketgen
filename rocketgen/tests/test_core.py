@@ -1,11 +1,11 @@
 import svgwrite
 
 from rocketgen import (
-    shape_funcs,
+    # shape_funcs,
     # render_stack,
     render_rocket,
     generate_random_rocket,
-    get_poly_kwargs_from_style_obj,
+    # get_poly_kwargs_from_style_obj,
 )
 
 example_rocket = {
@@ -103,10 +103,10 @@ svg = render_rocket(example_rocket)
 file("output/example_rocket_.svg", "w").write(svg.tostring())
 
 
-
-
-# for i in range(20):
-#     random_rocket = generate_random_rocket()
+for i in range(20):
+    random_rocket = generate_random_rocket()
+    svg = render_rocket(random_rocket)
+    file("output/rocket_"+str(i)+".svg", "w").write(svg.tostring())
 
 #     poly_kwargs = get_poly_kwargs_from_style_obj(random_rocket["style"])
 
