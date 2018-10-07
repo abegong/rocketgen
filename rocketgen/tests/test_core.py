@@ -1,3 +1,10 @@
+import svgwrite
+
+from rocketgen import (
+    shape_funcs,
+    render_stack,
+    generate_random_rocket,
+)
 
 default_poly_kwargs = {
     "stroke" : svgwrite.rgb(64, 64, 64),
@@ -22,8 +29,8 @@ example_rocket = {
     },{
         "shape" : "rectangle",
         "kwargs" : {
-            "w" : 20,
-            "h" : 40,
+            "w" : 30,
+            "h" : 60,
         }
     },{
         "shape" : "trapezoid",
@@ -42,17 +49,17 @@ example_rocket = {
     }
 }
 
-svg = svgwrite.Drawing('test.svg')
-x,y = 100, 10
-for shape in example_rocket["stack"]:
-    svg.add(
-    	shape_funcs[shape["shape"]](
-    		x,y,
-    		poly_kwargs=default_poly_kwargs,
-    		**shape["kwargs"]
-    	)
-    )
-    y += shape["kwargs"]["h"]
 
-# display(SVG(svg.tostring()))
-file("test_svg.svg", "w").write(svg.tostring())
+for i in range(20):
+    random_rocket = generate_random_rocket()
+    svg = svgwrite.Drawing('test.svg')
+    x,y = 100, 10
+    render_stack(
+        svg, x, y,
+        random_rocket["stack"],
+        # example_rocket["stack"],
+        default_poly_kwargs,
+    )
+    file("output/rocket_"+str(i)+".svg", "w").write(svg.tostring())
+
+
