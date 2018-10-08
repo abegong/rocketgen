@@ -71,6 +71,13 @@ def render_stack(svg, x, y, stack_obj, poly_kwargs):
         for shape in new_shapes:
             svg.add(shape)
 
+        if "attachments" in segment:
+            render_attachments(
+                svg, x, y,
+                segment["attachments"],
+                poly_kwargs,
+            )    
+
         y += segment["kwargs"]["h"]
 
 def render_attachments(svg, x,y, attachment_obj, poly_kwargs):
@@ -107,10 +114,5 @@ def render_rocket(rocket):
         rocket["segments"],
         poly_kwargs,
     )
-    render_attachments(
-        svg, x, y,
-        rocket["attachments"],
-        poly_kwargs,
-    )    
     # file("output/rocket_"+str(i)+".svg", "w").write(svg.tostring())
     return svg

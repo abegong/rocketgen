@@ -46,7 +46,18 @@ example_rocket = {
         "kwargs" : {
             "w" : 40,
             "h" : 40,
-        }
+        },
+        "attachments" : [{
+            "shape" : "circle",
+            "kwargs" : {
+                "x_offset" : 0,
+                "y_offset" : 20,
+                "r" : 10,
+            },
+            "style" : {
+                "fill" : [0,0,255]
+            }
+        }]
     },{
         "shape" : "trapezoid",
         "kwargs" : {
@@ -86,7 +97,18 @@ example_rocket = {
         "kwargs" : {
             "w" : 30,
             "h" : 60,
-        }
+        },
+        "attachments" : [{
+            "shape" : "mirrored_poly",
+            "kwargs" : {
+                "x_offset" : 19,
+                "y_offset" : 30,
+                "points" : [[0,0], [0,30], [20, 50], [20, 30]]
+            },
+            "style" : {
+                "fill" : [128,128,128]
+            }
+        }]
     },{
         "shape" : "trapezoid",
         "kwargs" : {
@@ -97,30 +119,6 @@ example_rocket = {
         "style" : {
             "fill" : [128,128,128]
         }
-    }],
-    "attachments" : [{
-        "shape" : "mirrored_poly",
-        "kwargs" : {
-            "x_offset" : 19,
-            "y_offset" : 200,
-            "points" : [[0,0], [0,30], [20, 50], [20, 30]]
-        },
-        "style" : {
-            "fill" : [128,128,128]
-        }
-    },{
-        "shape" : "circle",
-        "kwargs" : {
-            "x_offset" : 0,
-            "y_offset" : 60,
-            "r" : 10,
-        },
-        "style" : {
-            "fill" : [0,0,255]
-        }
-    },{
-        "shape" : "stack",
-        "kwargs" : sub_stack,
     }],
     "style" : {
         "stroke" : [64, 64, 64],
