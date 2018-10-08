@@ -46,6 +46,15 @@ def generate_random_stack_segment(last_w, is_top, is_last):
         else:
             raise ValueError
 
+    if random.random() > .8:
+        segment["style"] = {
+            "fill" : random.choice([
+                [32, 32, 32],
+                [128, 128, 128],
+                [255, 255, 255],
+            ])
+        }
+
     return segment, last_w
 
 def generate_random_rocket():
