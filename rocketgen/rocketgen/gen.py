@@ -2,6 +2,7 @@ import random
 import json
 
 def generate_random_stack_segment(last_w, is_top, is_last):
+
     if is_top and random.random() > .3:
         segment = {
             "shape" : "isotri",
@@ -54,6 +55,32 @@ def generate_random_stack_segment(last_w, is_top, is_last):
                 [255, 255, 255],
             ])
         }
+
+    if random.random() > .90:
+        segment["attachments"] = [{
+            "shape" : "mirrored_poly",
+            "kwargs" : {
+                "x_offset" : segment["kwargs"]["w"]/2,
+                "y_offset" : random.uniform(0, segment["kwargs"]["h"]-20),
+                "points" : [[0,0], [0,30], [20, 50], [20, 30]]
+            },
+            "style" : {
+                "fill" : [128,128,128]
+            }
+        }]
+
+    if random.random() > .90:
+        segment["attachments"] = [{
+            "shape" : "circle",
+            "kwargs" : {
+                "x_offset" : 0,
+                "y_offset" : segment["kwargs"]["h"]/2,
+                "r" : random.uniform(segment["kwargs"]["w"]*.25/2, segment["kwargs"]["w"]*.75/2),
+            },
+            "style" : {
+                "fill" : [0,0,255]
+            }
+        }]
 
     return segment, last_w
 
