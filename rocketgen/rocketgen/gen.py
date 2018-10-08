@@ -56,13 +56,16 @@ def generate_random_stack_segment(last_w, is_top, is_last):
             ])
         }
 
-    if random.random() > .90:
+    if random.random() > .85:
+        fin_h = random.randint(3,8)*10
+        fin_w = random.randint(1,5)*10
+        fin_h2 = random.randint(1,5)*10
         segment["attachments"] = [{
             "shape" : "mirrored_poly",
             "kwargs" : {
                 "x_offset" : segment["kwargs"]["w"]/2,
                 "y_offset" : random.uniform(0, segment["kwargs"]["h"]-20),
-                "points" : [[0,0], [0,30], [20, 50], [20, 30]]
+                "points" : [[0,0], [0,fin_h2], [fin_w, fin_h], [fin_w, fin_h2]]
             },
             "style" : {
                 "fill" : [128,128,128]
