@@ -5,6 +5,35 @@ from rocketgen import (
     generate_random_rocket,
 )
 
+sub_stack = {
+    "segments" : [{
+        "shape" : "isotri",
+        "kwargs" : {
+            "w" : 40,
+            "h" : 40,
+        }
+    },{
+        "shape" : "rectangle",
+        "kwargs" : {
+            "w" : 40,
+            "h" : 40,
+        }
+    },{
+        "shape" : "trapezoid",
+        "kwargs" : {
+            "w" : 40,
+            "h" : 15,
+            "spread" : .75,
+        },
+        "style" : {
+            "fill" : [128,128,128]
+        }
+    }],
+    "attachments" : [],
+    "style" : {},
+}
+
+
 example_rocket = {
     "segments" : [{
         "shape" : "isotri",
@@ -70,20 +99,28 @@ example_rocket = {
         }
     }],
     "attachments" : [{
-        "type" : "fin",
+        "shape" : "mirrored_poly",
         "kwargs" : {
-            "y"
+            "x_offset" : 19,
+            "y_offset" : 200,
+            "points" : [[0,0], [0,30], [20, 50], [20, 30]]
+        },
+        "style" : {
+            "fill" : [128,128,128]
         }
     },{
-        "type" : "circle",
+        "shape" : "circle",
         "kwargs" : {
-            "y"
+            "x_offset" : 0,
+            "y_offset" : 60,
+            "r" : 10,
+        },
+        "style" : {
+            "fill" : [0,0,255]
         }
     },{
-        "type" : "stack",
-        "kwargs" : {
-            "y"
-        }
+        "shape" : "stack",
+        "kwargs" : sub_stack,
     }],
     "style" : {
         "stroke" : [64, 64, 64],
