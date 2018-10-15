@@ -1,7 +1,7 @@
 import random
 import json
 
-def generate_random_stack_segment(last_w, is_top, is_last):
+def generate_random_stack_segment(last_w, is_top, is_last, depth=0):
 
     if is_top and random.random() > .3:
         segment = {
@@ -60,6 +60,14 @@ def generate_random_stack_segment(last_w, is_top, is_last):
         fin_h = random.randint(3,8)*10
         fin_w = random.randint(1,5)*10
         fin_h2 = random.randint(1,5)*10
+        segment["attachments"] = [
+            generate_random_substack(1, 5-depth)
+        ]
+
+    if random.random() > .85:
+        fin_h = random.randint(3,8)*10
+        fin_w = random.randint(1,5)*10
+        fin_h2 = random.randint(1,5)*10
         segment["attachments"] = [{
             "shape" : "mirrored_poly",
             "kwargs" : {
@@ -86,6 +94,26 @@ def generate_random_stack_segment(last_w, is_top, is_last):
         }]
 
     return segment, last_w
+
+def generate_random_substack(min_segments, max_segments):
+    segments = []
+
+    last_w = 10+random.random()*100
+    for i in range(random.randint(min_segments, max_segments)):
+        segment, last_w = generate_random_stack_segment(
+            last_w,
+            is_top=i==0,
+            is_last=False,
+        )
+        segments.append(segment)
+
+    return {
+        "shape" : "stack",
+        "x_offsets" : [-30, 30],
+        "y_offset" : -10,
+        "segments" : segments    
+    }
+
 
 def generate_random_rocket():
     segments = []

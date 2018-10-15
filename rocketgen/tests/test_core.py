@@ -6,22 +6,40 @@ from rocketgen import (
 )
 
 sub_stack = {
+    "shape" : "stack",
+    "x_offsets" : [-30, 30],
+    "y_offset" : -10,
     "segments" : [{
         "shape" : "isotri",
         "kwargs" : {
-            "w" : 40,
+            "w" : 20,
             "h" : 40,
         }
     },{
         "shape" : "rectangle",
         "kwargs" : {
-            "w" : 40,
-            "h" : 40,
+            "w" : 20,
+            "h" : 10,
+        }
+    },{
+        "shape" : "rectangle",
+        "style" : {
+            "fill" : [255,255,255]
+        },
+        "kwargs" : {
+            "w" : 20,
+            "h" : 20,
+        }
+    },{
+        "shape" : "rectangle",
+        "kwargs" : {
+            "w" : 20,
+            "h" : 10,
         }
     },{
         "shape" : "trapezoid",
         "kwargs" : {
-            "w" : 40,
+            "w" : 20,
             "h" : 15,
             "spread" : .75,
         },
@@ -30,7 +48,9 @@ sub_stack = {
         }
     }],
     "attachments" : [],
-    "style" : {},
+    "style" : {
+
+    },
 }
 
 
@@ -82,7 +102,8 @@ example_rocket = {
         "kwargs" : {
             "w" : 30,
             "h" : 60,
-        }
+        },
+        "attachments" : [sub_stack]
     },{
         "shape" : "rectangle",
         "kwargs" : {

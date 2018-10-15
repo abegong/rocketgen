@@ -1,3 +1,4 @@
+import json
 import svgwrite
 
 from .util import (
@@ -62,6 +63,8 @@ def render_stack(svg, x, y, stack_obj, poly_kwargs):
             segment_poly_kwargs = poly_kwargs
 
 
+        # print(json.dumps(segment, indent=2))
+
         new_shapes = shape_funcs[segment["shape"]](
             x,y,
             poly_kwargs=segment_poly_kwargs,
@@ -93,6 +96,8 @@ def render_attachments(svg, x,y, attachment_obj, poly_kwargs):
             attachment_poly_kwargs = poly_kwargs
 
 
+        # print(json.dumps(attachment, indent=2))
+
         if attachment["shape"] != "stack":
             new_shapes = shape_funcs[attachment["shape"]](
                 x,y,
@@ -102,6 +107,17 @@ def render_attachments(svg, x,y, attachment_obj, poly_kwargs):
 
             for shape in new_shapes:
                 svg.add(shape)
+
+        else:
+            for x_offset in attachment["x_offsets"]:
+                render_stack(
+                    svg,
+                    x+x_offset,
+                    y+attachment["y_offset"],
+                    attachment["segments"],
+                    poly_kwargs,
+                )
+            # assert(False)
 
 
 def render_rocket(rocket):
