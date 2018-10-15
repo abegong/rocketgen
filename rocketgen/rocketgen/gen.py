@@ -1,7 +1,7 @@
 import random
 import json
 
-def generate_random_stack_segment(last_w, is_top, is_last, depth=0):
+def generate_random_stack_segment(last_w, is_top, is_last, depth=1):
 
     if is_top and random.random() > .3:
         segment = {
@@ -61,7 +61,7 @@ def generate_random_stack_segment(last_w, is_top, is_last, depth=0):
         fin_w = random.randint(1,5)*10
         fin_h2 = random.randint(1,5)*10
         segment["attachments"] = [
-            generate_random_substack(1, 5-depth)
+            generate_random_substack(segment, depth)
         ]
 
     if random.random() > .85:
@@ -95,22 +95,28 @@ def generate_random_stack_segment(last_w, is_top, is_last, depth=0):
 
     return segment, last_w
 
-def generate_random_substack(min_segments, max_segments):
+def generate_random_substack(parent_segment, depth):
+    min_segments, max_segments = 1, 5-depth
+    parent_width = parent_segment["kwargs"]["w"]
     segments = []
 
-    last_w = 10+random.random()*100
+    first_w = random.uniform(20, parent_width*1.5)
+    last_w = first_w
     for i in range(random.randint(min_segments, max_segments)):
         segment, last_w = generate_random_stack_segment(
             last_w,
             is_top=i==0,
             is_last=False,
+            depth=depth+1,
         )
         segments.append(segment)
 
+    print(parent_segment)
+    x_offset = random.uniform(first_w*.5, (first_w+parent_width))
     return {
         "shape" : "stack",
-        "x_offsets" : [-30, 30],
-        "y_offset" : -10,
+        "x_offsets" : [-1*x_offset, x_offset],
+        "y_offset" : random.uniform(0, parent_segment["kwargs"]["h"]),
         "segments" : segments    
     }
 

@@ -71,15 +71,17 @@ def render_stack(svg, x, y, stack_obj, poly_kwargs):
             **segment["kwargs"]
         )
 
-        for shape in new_shapes:
-            svg.add(shape)
-
+        #FIXME: stack attachments usually need to be rendered first,
+        #but other attachments should be rendered later, so they can go on top.
         if "attachments" in segment:
             render_attachments(
                 svg, x, y,
                 segment["attachments"],
                 poly_kwargs,
             )    
+
+        for shape in new_shapes:
+            svg.add(shape)
 
         y += segment["kwargs"]["h"]
 
@@ -124,7 +126,7 @@ def render_rocket(rocket):
     poly_kwargs = get_poly_kwargs_from_style_obj(rocket["style"])
 
     svg = svgwrite.Drawing('test.svg')
-    x,y = 100, 10
+    x,y = 200, 10
     render_stack(
         svg, x, y,
         rocket["segments"],
